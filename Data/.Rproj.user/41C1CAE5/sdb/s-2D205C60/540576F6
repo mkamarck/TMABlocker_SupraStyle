@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1500913348096.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "540576F6",
+    "lastKnownWriteTime" : 1500913329,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "1hniwr3ucb",
+        "caption" : "df.scaleByConcentration",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df.scaleByConcentration&cache_key=1hniwr3ucb",
+        "displayedObservations" : 120,
+        "environment" : "",
+        "object" : "df.scaleByConcentration",
+        "totalObservations" : 120,
+        "variables" : 8
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1502232409946.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "82BA54C1",
+    "lastKnownWriteTime" : 7885595605502864978,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "xj4m1oma9v",
+        "caption" : "TR.allCombos.melt",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=TR.allCombos.melt&cache_key=xj4m1oma9v",
+        "displayedObservations" : 66,
+        "environment" : "",
+        "object" : "TR.allCombos.melt",
+        "totalObservations" : 66,
+        "variables" : 3
+    },
+    "relative_order" : 17,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

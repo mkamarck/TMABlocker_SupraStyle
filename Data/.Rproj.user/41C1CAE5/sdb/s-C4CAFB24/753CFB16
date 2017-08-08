@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1498665813147.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "753CFB16",
+    "lastKnownWriteTime" : 0,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "cc9o7h6b8e",
+        "caption" : "valve.list",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=valve.list&cache_key=cc9o7h6b8e",
+        "displayedObservations" : 40,
+        "environment" : "",
+        "object" : "valve.list",
+        "totalObservations" : 40,
+        "variables" : 9
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

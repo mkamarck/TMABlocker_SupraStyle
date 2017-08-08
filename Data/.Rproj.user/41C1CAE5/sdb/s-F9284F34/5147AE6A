@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1500652584862.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5147AE6A",
+    "lastKnownWriteTime" : 7816406529744203893,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "7wjs9k0n27",
+        "caption" : "df.scaleJars",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df.scaleJars&cache_key=7wjs9k0n27",
+        "displayedObservations" : "120",
+        "environment" : "",
+        "object" : "df.scaleJars",
+        "totalObservations" : "120",
+        "variables" : "10"
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1496681999870.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "CA330D36",
+    "lastKnownWriteTime" : 4294967040,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "vxexqokb7r",
+        "caption" : "df.sort",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df.sort&cache_key=vxexqokb7r",
+        "displayedObservations" : 259,
+        "environment" : "",
+        "object" : "df.sort",
+        "totalObservations" : 259,
+        "variables" : 13
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1501777948779.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B17E3DE4",
+    "lastKnownWriteTime" : 5994135408972361580,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "skfyy133wc",
+        "caption" : "testDataRename1",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=testDataRename1&cache_key=skfyy133wc",
+        "displayedObservations" : 1152,
+        "environment" : "",
+        "object" : "testDataRename1",
+        "totalObservations" : 1152,
+        "variables" : 9
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

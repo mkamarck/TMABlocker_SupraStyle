@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1499463882382.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9C105422",
+    "lastKnownWriteTime" : 2317442166205538096,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "tsjfzbopwu",
+        "caption" : "fake.Concentrations",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=fake.Concentrations&cache_key=tsjfzbopwu",
+        "displayedObservations" : 10,
+        "environment" : "",
+        "object" : "fake.Concentrations",
+        "totalObservations" : 10,
+        "variables" : 3
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

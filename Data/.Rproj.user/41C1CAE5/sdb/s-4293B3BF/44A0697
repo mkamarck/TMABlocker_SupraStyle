@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1502234190147.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "44A0697",
+    "lastKnownWriteTime" : 7816406529744203893,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "bti74mpvv0",
+        "caption" : "Trial.12",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=Trial.12&cache_key=bti74mpvv0",
+        "displayedObservations" : "121",
+        "environment" : "",
+        "object" : "Trial.12",
+        "totalObservations" : "121",
+        "variables" : "6"
+    },
+    "relative_order" : 18,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

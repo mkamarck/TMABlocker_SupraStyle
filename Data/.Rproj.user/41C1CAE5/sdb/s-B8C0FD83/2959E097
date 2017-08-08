@@ -1,0 +1,18 @@
+{
+    "contents" : "#agitating the TMA jars 7/25/17 by bubbling through the liquid\n#Import Libraries\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(pipeR)\n\n#Import Data\nsubj <- dir(path = \"Raw Data/DR_Agitated\", pattern=\"\\\\.txt$\", full.names=TRUE)# creating a list of all file names\nnames(subj)  <- basename(subj)\ndf  <- ldply(subj, read.delim, stringsAsFactors=FALSE) \n#subset variables\ndf <- subset(df, select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"TrainList\", \"Running.Block.\", \"IntensityRating\"))\ndf$IntensityRating.inv <- 580-as.integer(df$IntensityRating)\n\n#Trial Data\ndf.trial <- subset(df, Running.Block. == \"Test\", select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"Running.Block.\", \"IntensityRating.inv\"))\n\n#name the trials based on valves\nvalve.list <- read.csv(\"Analysis/TMA_DR_merge.csv\")\n\n#merge with trial list\ndf.trial_merge <- merge(df.trial, valve.list)\n\n#graph\nggplot(df.trial_merge, aes(x = TMA.Concentration, y = IntensityRating.inv, colour = factor(valve2))) +\n  geom_point() +\n  facet_wrap(~Subject)\n\n#Figure out the order of the subjects so I can see if TMA decreases over time. \n#11 was first on 7-26-17\n#33 and 50 were next (not sure the order)\n#29 was after that, but also on 7/27\n#the water alone seems to have some odor - or at least more odor than the DEP; might need to replace the water everyday",
+    "created" : 1501100668221.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3827595397",
+    "id" : "2959E097",
+    "lastKnownWriteTime" : 1501184441,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/TMA_DR_agitated.R",
+    "project_path" : "Analysis/TMA_DR_agitated.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

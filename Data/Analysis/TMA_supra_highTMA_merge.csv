@@ -1,0 +1,41 @@
+valve,valve2,Type,Concentration
+2,22,Blank 1,0
+24,23,Blank 2,0
+2,24,Blank combo,0
+22,23,blank combo,0
+3,24,TMA,1
+27,23,TMA,2
+28,24,TMA,3
+30,23,TMA,4
+31,24,TMA,5
+32,23,TMA,6
+15,2,Nonenol,1
+14,22,Nonenol,2
+13,2,Nonenol,3
+25,22,Nonenol,4
+11,2,Nonenol,5
+10,22,Nonenol,6
+21,2,Linalool,1
+20,22,Linalool,2
+19,2,Linalool,3
+18,22,Linalool,4
+17,2,Linalool,5
+16,22,Linalool,6
+3,15,TMA + Non,1
+27,14,TMA + Non,2
+28,13,TMA + Non,3
+30,25,TMA + Non,4
+31,11,TMA + Non,5
+32,10,TMA + Non,6
+3,21,TMA + Lin,1
+27,20,TMA + Lin,2
+28,19,TMA + Lin,3
+30,18,TMA + Lin,4
+31,17,TMA + Lin,5
+32,16,TMA + Lin,6
+15,21,Non + Lin,1
+14,20,Non + Lin,2
+13,19,Non + Lin,3
+25,18,Non + Lin,4
+11,17,Non + Lin,5
+10,16,Non + Lin,6

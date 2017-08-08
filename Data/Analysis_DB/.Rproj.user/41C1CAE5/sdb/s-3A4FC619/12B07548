@@ -1,0 +1,18 @@
+{
+    "contents" : "#sample code for Casey\n\n###########normalized data########\n",
+    "created" : 1501686756827.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3307233309",
+    "id" : "12B07548",
+    "lastKnownWriteTime" : 1501686802,
+    "path" : "~/Desktop/SampleCode.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

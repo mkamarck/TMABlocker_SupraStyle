@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#Import Libraries\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(pipeR)\n\n#Import Data\nsubj <- dir(path = \"Raw Data\", pattern=\"\\\\.txt$\", full.names=TRUE)# creating a list of all file names\nnames(subj)  <- basename(subj)\ndf  <- ldply(subj, read.delim, stringsAsFactors=FALSE) \n\n#subset variables\ndf <- subset(df, select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"TrainList\", \"Running.Block.\", \"IntensityRating\"))\ndf$IntensityRating.inv <- 580-as.integer(df$IntensityRating)\n\n#Trial Data\ndf.trial <- subset(df, Running.Block. == \"Test\", select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"Running.Block.\", \"IntensityRating.inv\"))\n#write.csv(df.trial, \"TMA_supra_9.csv\") #give this to Dardalie to import\n\n#import the file that has the trial types\n#valve.list <- read.csv(\"Analysis/TMA_supra_Pilot_merge.csv\")\nvalve.list <- read.csv(\"Analysis/TMA_supra_highTMA_merge.csv\")\n\n#merge with trial list\ndf.trial_merge <- merge(df.trial, valve.list)\n\n\n#10 are dardalie;  7 is ALice; and 4 is the first participant we ran today.\n# test <- subset(df.trial, Subject == 10)\n# test[which(test$valve == 32),]\nggplot(data = subset(df.trial_merge), aes(x = Concentration, y = IntensityRating.inv, color = factor(Subject))) +\n  geom_point() +\n  facet_wrap(~Type)\n\n#Plot each person individually\nfor (i in unique(df.trial_merge$Subject)) {\n  plot = ggplot(data = subset(df.trial_merge, Subject == i), aes(x = Concentration, y = IntensityRating.inv, color = factor(Subject))) +\n    geom_point() +\n    facet_wrap(~Type) +\n    ggtitle(paste(\"Subject Number \", i))\n  print(plot)\n}\n\n#refreshed odors on 7/11 after participants 10, 7, 4, and 16\n",
+    "created" : 1499280686989.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4086439179",
+    "id" : "988B8985",
+    "lastKnownWriteTime" : 1499869669,
+    "last_content_update" : 1499869669733,
+    "path" : "//monell/storage/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/TMABlockSupra_Analysis.R",
+    "project_path" : "Analysis/TMABlockSupra_Analysis.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

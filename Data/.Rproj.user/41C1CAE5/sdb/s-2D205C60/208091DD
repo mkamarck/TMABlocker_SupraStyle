@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1500911659110.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "208091DD",
+    "lastKnownWriteTime" : 7809639168600077683,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "214rgx0692",
+        "caption" : "subTrials.Concentration",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=subTrials.Concentration&cache_key=214rgx0692",
+        "displayedObservations" : "30",
+        "environment" : "",
+        "object" : "subTrials.Concentration",
+        "totalObservations" : "30",
+        "variables" : "8"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

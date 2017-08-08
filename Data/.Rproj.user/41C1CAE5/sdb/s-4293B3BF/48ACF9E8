@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1502232397656.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "48ACF9E8",
+    "lastKnownWriteTime" : 7885630523586996594,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "as0l0vl5fj",
+        "caption" : "Trial.combo.melt",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=Trial.combo.melt&cache_key=as0l0vl5fj",
+        "displayedObservations" : "484",
+        "environment" : "",
+        "object" : "Trial.combo.melt",
+        "totalObservations" : "484",
+        "variables" : "6"
+    },
+    "relative_order" : 16,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

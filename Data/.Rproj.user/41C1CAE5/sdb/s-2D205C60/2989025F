@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1500652572171.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "2989025F",
+    "lastKnownWriteTime" : 7816406529744203893,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "ktvndfzahi",
+        "caption" : "df.trialJars",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df.trialJars&cache_key=ktvndfzahi",
+        "displayedObservations" : "120",
+        "environment" : "",
+        "object" : "df.trialJars",
+        "totalObservations" : "120",
+        "variables" : "7"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

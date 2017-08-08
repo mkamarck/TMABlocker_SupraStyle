@@ -1,0 +1,18 @@
+{
+    "contents" : "#sample code for Casey\n\n###########normalized data########\n#Normalize###\nscale01 <- function(value, minValue, maxValue) {\n  (value - minValue)/(maxValue - minValue)\n}\n#returns dataframe with the minimum and maximum values for each subject\nsubjMinMax <- ddply(df.trialJars, .variables = c(\"Subject\"), .fun = summarize, minValue = min(IntensityRating.inv), maxValue = max(IntensityRating.inv))\n#merges the max and min values with the full dataframe\ndf.scaleJars <- merge(df.trialJars, subjMinMax)\n#calculates the normalized values using the scale function\ndf.scaleJars$normValue <- scale01(df.scaleJars$IntensityRating.inv, df.scaleJars$minValue, df.scaleJars$maxValue)\n\n\n#########fit a curve #########\n#run HIll model#####\n#NOTE: Code is different if you put in the log10(Concentration)\ncurve <- drm(formula = IntensityRating~Concentration, data = df, fct = LL.4(fixed = c(1, NA, NA, NA), names = (c(\"Slope\", \"Top\", \"Bottom\", \"ED\"))))\nsummary(curve)    #shows the statistics on your model\n#run this function to put the curve in your graph\ncurve.graph = function(x){\n  summary(curve)$coefficients[2,1] + (summary(curve)$coefficients[1,1]-summary(curve)$coefficients[2,1])/(1+10^((log10(summary(curve)$coefficients[3,1]) - x)*1))\n}\n\n#graph code will look something like this\n#make another variable with the log concentration of Androstenone to graph it against. If you change it using the scale_x code your model will look weird becuase it scales everything.\ndf$logConcentration <- log10(Concentration)\nggplot(data = df, aes(x = logConcentration, y = IntensityRating, color = factor(Subject))) +\n  geom_point() +\n  stat_function(fun = TMAjars.graph) #This puts the model onto the graph\n\n",
+    "created" : 1501686756827.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3715274112",
+    "id" : "12B07548",
+    "lastKnownWriteTime" : 1501687433,
+    "path" : "~/Desktop/SampleCode.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

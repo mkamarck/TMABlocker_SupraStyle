@@ -1,0 +1,18 @@
+{
+    "contents" : "#Import Libraries\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(pipeR)\n\n#Import Data\nsubj <- dir(path = \"Raw Data/\", pattern=\"\\\\.txt$\", full.names=TRUE)# creating a list of all file names\nnames(subj)  <- basename(subj)\ndf  <- ldply(subj, read.delim, stringsAsFactors=FALSE) \n#subset variables\ndf <- subset(df, select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"TrainList\", \"Running.Block.\", \"IntensityRating\"))\ndf$IntensityRating.inv <- 580-as.integer(df$IntensityRating)\n\n#Trial Data\ndf.trial <- subset(df, Running.Block. == \"Test\", select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"Running.Block.\", \"IntensityRating.inv\"))\n\n#name the trials based on valves\nvalve.list <- read.csv(\"Analysis/TMA_supra_Pilot_merge.csv\")\n\n#merge with trial list\ndf.trial_merge <- merge(df.trial, valve.list )\n#lost some stuff, try graphing and get back to it. \n\n#graph\nggplot(data = subset(df.trial_merge), aes(x = Concentration, y = IntensityRating.inv, color = Type)) +\n  geom_point() +\n  facet_wrap(~Type)\n\n#graph each subject\nfor (i in c(1, 3, 5, 6)){\n  plot <- ggplot(data = subset(df.trial_merge, Subject == i), aes(x = Concentration, y = IntensityRating.inv, color = Type)) +\n    geom_point() +\n    facet_grid(Type~.) +\n    ggtitle(paste(\"Subject # \", i))\n  print(plot)\n}\n\n#graph each subject better\npdf(\"pilot graphs.pdf\")\nfor (i in c(1, 3, 5, 6)){\n plot <-  ggplot(data = subset(df.trial_merge, antag_anal == 1 & Subject == i), aes(x = Concentration, y = IntensityRating.inv, color = Type)) +\n    geom_point() +\n    ggtitle(paste(\"Subject # \", i))\n  print(plot)\n}\ndev.off()\n",
+    "created" : 1496350378459.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2760361851",
+    "id" : "2D4A74BF",
+    "lastKnownWriteTime" : 1496414099,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/PilotData.R",
+    "project_path" : "Analysis/PilotData.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1499463386137.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6599FA12",
+    "lastKnownWriteTime" : 0,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "vb25nscyra",
+        "caption" : "df.merge",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df.merge&cache_key=vb25nscyra",
+        "displayedObservations" : "2080",
+        "environment" : "",
+        "object" : "df.merge",
+        "totalObservations" : "2080",
+        "variables" : "12"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

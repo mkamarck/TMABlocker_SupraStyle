@@ -1,0 +1,474 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.1.19)  10 FEB 2016 13:03
+entering extended mode
+**./test.tex
+(test.tex
+LaTeX2e <2015/10/01> patch level 2
+Babel <3.9n> and hyphenation patterns for 69 languages loaded.
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\standalone\st
+andalone.cls"
+Document Class: standalone 2015/07/15 v1.2 Class to compile TeX sub-files stand
+alone
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\if
+luatex.sty"
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\if
+pdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifx
+etex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xkeyval\xkeyv
+al.sty"
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\xke
+yval.tex"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\xkv
+utils.tex"
+\XKV@toks=\toks14
+\XKV@tempa@toks=\toks15
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\key
+val.tex"))
+\XKV@depth=\count79
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+\sa@internal=\count80
+\c@sapage=\count81
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\standalone\st
+andalone.cfg"
+File: standalone.cfg 2015/07/15 v1.2 Default configuration file for 'standalone
+' class
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.
+cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size10.c
+lo"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\c@figure=\count88
+\c@table=\count89
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+\sa@box=\box26
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\frontendl
+ayer\tikz.sty"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\basiclaye
+r\pgf.sty"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities
+\pgfrcs.sty"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utiliti
+es\pgfutil-common.tex"
+\pgfutil@everybye=\toks16
+\pgfutil@tempdima=\dimen103
+\pgfutil@tempdimb=\dimen104
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utiliti
+es\pgfutil-common-lists.tex"))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utiliti
+es\pgfutil-latex.def"
+\pgfutil@abb=\box27
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ms\everyshi.s
+ty"
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utiliti
+es\pgfrcs.code.tex"
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\basiclaye
+r\pgfcore.sty"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\grap
+hicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\grap
+hics.sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig
+.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\grap
+hics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdftex-def\pd
+ftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\in
+fwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\lt
+xcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count90
+))
+\Gin@req@height=\dimen105
+\Gin@req@width=\dimen106
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\systemlay
+er\pgfsys.sty"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systeml
+ayer\pgfsys.code.tex"
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utiliti
+es\pgfkeys.code.tex"
+\pgfkeys@pathtoks=\toks17
+\pgfkeys@temptoks=\toks18
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utiliti
+es\pgfkeysfiltered.code.tex"
+\pgfkeys@tmptoks=\toks19
+))
+\pgf@x=\dimen107
+\pgf@y=\dimen108
+\pgf@xa=\dimen109
+\pgf@ya=\dimen110
+\pgf@xb=\dimen111
+\pgf@yb=\dimen112
+\pgf@xc=\dimen113
+\pgf@yc=\dimen114
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count91
+\c@pgf@countb=\count92
+\c@pgf@countc=\count93
+\c@pgf@countd=\count94
+\t@pgf@toka=\toks20
+\t@pgf@tokb=\toks21
+\t@pgf@tokc=\toks22
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systeml
+ayer\pgf.cfg"
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systeml
+ayer\pgfsys-pdftex.def"
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systeml
+ayer\pgfsys-common-pdf.def"
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systeml
+ayer\pgfsyssoftpath.code.tex"
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count95
+\pgfsyssoftpath@bigbuffer@items=\count96
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systeml
+ayer\pgfsysprotocol.code.tex"
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor
+.sty"
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\colo
+r.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcore.code.tex"
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmath.code.tex"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathcalc.code.tex"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathutil.code.tex")
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathparser.code.tex"
+\pgfmath@dimen=\dimen115
+\pgfmath@count=\count97
+\pgfmath@box=\box28
+\pgfmath@toks=\toks23
+\pgfmath@stack@operand=\toks24
+\pgfmath@stack@operation=\toks25
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.code.tex"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.basic.code.tex")
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.trigonometric.code.tex")
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.random.code.tex")
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.comparison.code.tex")
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.base.code.tex")
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.round.code.tex")
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.misc.code.tex")
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfunctions.integerarithmetics.code.tex")))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmathfloat.code.tex"
+\c@pgfmathroundto@lastzeros=\count98
+))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorepoints.code.tex"
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen116
+\pgf@picmaxx=\dimen117
+\pgf@picminy=\dimen118
+\pgf@picmaxy=\dimen119
+\pgf@pathminx=\dimen120
+\pgf@pathmaxx=\dimen121
+\pgf@pathminy=\dimen122
+\pgf@pathmaxy=\dimen123
+\pgf@xx=\dimen124
+\pgf@xy=\dimen125
+\pgf@yx=\dimen126
+\pgf@yy=\dimen127
+\pgf@zx=\dimen128
+\pgf@zy=\dimen129
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorepathconstruct.code.tex"
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen130
+\pgf@path@lasty=\dimen131
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorepathusage.code.tex"
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen132
+\pgf@shorten@start@additional=\dimen133
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorescopes.code.tex"
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box29
+\pgf@hbox=\box30
+\pgf@layerbox@main=\box31
+\pgf@picture@serial@count=\count99
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcoregraphicstate.code.tex"
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen134
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcoretransformations.code.tex"
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen135
+\pgf@pt@y=\dimen136
+\pgf@pt@temp=\dimen137
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorequick.code.tex"
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcoreobjects.code.tex"
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorepathprocessing.code.tex"
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorearrows.code.tex"
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen138
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcoreshade.code.tex"
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen139
+\pgf@sys@shading@range@num=\count100
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcoreimage.code.tex"
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcoreexternal.code.tex"
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box32
+))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorelayers.code.tex"
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcoretransparency.code.tex"
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basicla
+yer\pgfcorepatterns.code.tex"
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\modules
+\pgfmoduleshapes.code.tex"
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box33
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\modules
+\pgfmoduleplot.code.tex"
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\compatibi
+lity\pgfcomp-version-0-65.sty"
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen140
+\pgf@nodesepend=\dimen141
+)
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\compatibi
+lity\pgfcomp-version-1-18.sty"
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities
+\pgffor.sty"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities
+\pgfkeys.sty"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utiliti
+es\pgfkeys.code.tex"))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\math\pgfm
+ath.sty"
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmath.code.tex"))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utiliti
+es\pgffor.code.tex"
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pg
+fmath.code.tex")
+\pgffor@iter=\dimen142
+\pgffor@skip=\dimen143
+\pgffor@stack=\toks26
+\pgffor@toks=\toks27
+))
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\fronten
+dlayer\tikz\tikz.code.tex"
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\librari
+es\pgflibraryplothandlers.code.tex"
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count101
+\pgfplotmarksize=\dimen144
+)
+\tikz@lastx=\dimen145
+\tikz@lasty=\dimen146
+\tikz@lastxsaved=\dimen147
+\tikz@lastysaved=\dimen148
+\tikzleveldistance=\dimen149
+\tikzsiblingdistance=\dimen150
+\tikz@figbox=\box34
+\tikz@figbox@bg=\box35
+\tikz@tempbox=\box36
+\tikz@tempbox@bg=\box37
+\tikztreelevel=\count102
+\tikznumberofchildren=\count103
+\tikznumberofcurrentchild=\count104
+\tikz@fig@count=\count105
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\modules
+\pgfmodulematrix.code.tex"
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count106
+\pgfmatrixcurrentcolumn=\count107
+\pgf@matrix@numberofcolumns=\count108
+)
+\tikz@expandcount=\count109
+
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\fronten
+dlayer\tikz\libraries\tikzlibrarytopaths.code.tex"
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+))) (test.aux)
+\openout1 = `test.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+
+ABD: EveryShipout initializing macros
+("C:\Users\ptendolkar\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-p
+df.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count110
+\scratchdimen=\dimen151
+\scratchbox=\box38
+\nofMPsegments=\count111
+\nofMParguments=\count112
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count113
+\MPscratchDim=\dimen152
+\MPnumerator=\count114
+\makeMPintoPDFobject=\count115
+\everyMPtoPDFconversion=\toks29
+) [1
+
+] (test.aux) ) 
+Here is how much of TeX's memory you used:
+ 11416 strings out of 493634
+ 237866 string characters out of 3133199
+ 260659 words of memory out of 3000000
+ 14624 multiletter control sequences out of 15000+200000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 55i,5n,56p,388b,387s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on test.pdf (1 page, 1187 bytes).
+PDF statistics:
+ 9 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+

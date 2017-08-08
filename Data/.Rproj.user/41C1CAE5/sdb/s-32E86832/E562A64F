@@ -1,0 +1,18 @@
+{
+    "contents" : "#Adaptation - previous concentration of TMA is affecting the current rating. \n#testing for this\n#Import Libraries#####\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(plotrix)\nlibrary(ggplot2)\nlibrary(reshape2)\nlibrary(plyr)\nlibrary(drc)#this one is for the dose response curve\nlibrary(tidyverse)\nlibrary(kimisc)\nlibrary(data.table)\nlibrary(combinat)\nlibrary(gtools)\nlibrary(wesanderson)\nlibrary(platetools)\nlibrary(ggplot2)\nlibrary(viridis)\n\n#Import Data####\nsubj <- dir(path = \"Raw Data/TMA_DR_jars\", pattern=\"\\\\.txt$\", full.names=TRUE) # creating a list of all file names\nnames(subj)  <- basename(subj)\ndf <- ldply(subj, read.delim, stringsAsFactors=FALSE) \n\n#subset the data\ndf.jars <- subset(df, select = c(\"Subject\", \"Trial\", \"TrainList\", \"Running.Block.\", \"IntensityRating\",\"Jar\",\"Concentration\")) \ndf.jars$IntensityRating.inv <- 580-as.integer(df.jars$IntensityRating)\n\n#Trial Data\ndf.trialJars <- subset(df.jars, Running.Block. == \"Test\", select = c(\"Subject\", \"Trial\",  \"Running.Block.\", \"IntensityRating.inv\",\"Jar\",\"Concentration\"))\n\n####Add column for previous concentration #####\ndf.trialJars$prevTrial <- df.trialJars$Trial - 1\n\ngetConcentrationPrevTrial <- function(subTrials){\n  for(i in 1:length(subTrials$Trial)){\n    if (subTrials$prevTrial[i] > 1){\n      subTrials$prevConc[i] <- subTrials$Concentration[which(subTrials$Trial == subTrials$prevTrial[i])]\n      \n    } else{\n      subTrials$prevConc[i] <- 0\n    }\n  }\n  return(subTrials)\n}\n\n#loop through subjects to get concentration and then combine the dataframes\ngetConcentrationFinal <- function(df.trialJars){\n  rm(df.prevConc)\n  for (i in unique(df.trialJars$Subject)){\n    subTrials <- subset(df.trialJars, Subject == i)\n    subTrials.Concentration <- getConcentrationPrevTrial(subTrials)\n    if(exists(\"df.prevConc\")){\n      df.prevConc <- rbind(df.prevConc, subTrials.Concentration)\n    } else{\n      df.prevConc <- subTrials.Concentration\n    }\n  }\n  return(df.prevConc)\n}\nrm(df.prevConcFinal)\ndf.prevConcFinal <- getConcentrationFinal(df.trialJars)\n\n#####Analyze the data by previous concentration#####\nggplot(df.prevConcFinal, aes(x = prevConc, y = IntensityRating.inv)) +\n  geom_point()+\n  facet_wrap(~Subject)\n\n#this doesn't show anything alone. \n\n\n#####Normalize by concentration and graph against prev concentration#####\n#Scale by concentration and subject\ndf.scaleByConcentration <- ddply(df.trialJars, .variables = c(\"Subject\", \"Concentration\"), .fun = mutate, scale(IntensityRating.inv))\nnames(df.scaleByConcentration) = c(\"Subject\", \"Trial\",\"Running.Block.\",\"IntensityRating.inv\",\"Jar\",\"Concentration\",\"prevTrial\",\"scaleRating\")\ndf.scaleByConcentration$prevTrial <- df.scaleByConcentration$Trial - 1\n#rm(df.prevConc)\n#rm(df.scale.prevConc)\ndf.scale.prevConc <- getConcentrationFinal(df.scaleByConcentration)\n#graph data\nggplot(df.scale.prevConc, aes(x = prevConc, y = scale(IntensityRating.inv))) +\n  geom_point()+\n  facet_wrap(~Subject) +\n  scale_x_log10()\n\n#This doesn't look like anything either. This is somewhat promising, but it still doesn't explain all the weird stuff we are seeing. \n\n\n",
+    "created" : 1500908802526.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "2|17|19|16|\n",
+    "hash" : "942833738",
+    "id" : "E562A64F",
+    "lastKnownWriteTime" : 1500914354,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/Adaptation_Analysis.R",
+    "project_path" : "Analysis/Adaptation_Analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

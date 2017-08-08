@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1498146451155.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6800865",
+    "lastKnownWriteTime" : 4294967296,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "pqx2298ii9",
+        "caption" : "DR_sessions",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=DR_sessions&cache_key=pqx2298ii9",
+        "displayedObservations" : "312",
+        "environment" : "",
+        "object" : "DR_sessions",
+        "totalObservations" : "312",
+        "variables" : "8"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

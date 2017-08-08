@@ -1,0 +1,17 @@
+{
+    "contents" : "#Import Libraries####\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\n#library(pipeR)\nlibrary(drc)\n\n\n#Import Data\nsubj <- dir(path = \"//monell/storage/mainland/Projects/TMA blocker/SupraStyle/Data/Raw Data/Test1_olfactometer\", pattern=\"\\\\.txt$\", full.names=TRUE)# creating a list of all file names\n#subj <- dir(path = \"/Volumes/mainland/Projects/TMA\\ blocker/SupraStyle/Data/Raw\\ Data/Test1_olfactometer\", pattern=\"\\\\.txt$\", full.names=TRUE)# creating a list of all file names\n\nnames(subj)  <- basename(subj)\ndf  <- ldply(subj, read.delim, stringsAsFactors=FALSE) \n\n#subset variables\ndf <- subset(df, select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"TrainList\", \"Running.Block.\", \"IntensityRating\"))\ndf$IntensityRating.inv <- 580-as.integer(df$IntensityRating)\n\n#Trial Data\ndf.trial <- subset(df, Running.Block. == \"Test\", select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"Running.Block.\", \"IntensityRating.inv\"))\n\n#import the file that has the trial types\nvalve.list <- read.csv(\"//monell/storage/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/TMA_supra_highTMA_merge.csv\") #for a pc\n\n#merge with trial list\ndf.trial_merge <- merge(df.trial, valve.list)\n\n\n\n\n\n#TMAretest.df <- subset(df.trial_merge, Type==\"TMA\")# DOES not work! WHY?\nTMAretest.df <- df.trial_merge\n# TMAtest.df <- df.trial_merge[df.trial_merge$Subject==5,]\n# TMAretest.df <- TMAtest.df[TMAtest.df$Type==\"TMA\",]\n\n#Setup df that splits and renames IntensityRating as Trial1/Trial2\n\nTMAretestRename1 <- subset(TMAretest.df,Trial<= 40)# df with Inten.Rate from  trial 1 \nTMAretestRename2 <- subset(TMAretest.df,Trial> 40)#df with Inten.Rate from  trial 2\nTMAretestRename1 <- TMAretestRename1[,-4] #get rid of trial numbers\nTMAretestRename2 <- TMAretestRename2[,-4] #get rid of trial numbers\ncolnames(TMAretestRename1)[5] <- \"Trial1\"\ncolnames(TMAretestRename2)[5] <- \"Trial2\"\ntestTMA.trials <- merge(TMAretestRename1,TMAretestRename2)#merge the dataframes\n\n#graph the trials\nggplot(data = subset(testTMA.trials), aes(x = Trial1, y = Trial2, color = Type)) +\n  geom_point() +\n  facet_wrap(~Subject)\n\n#Do the correlation\ntestTMA.corr <- ddply(testTMA.trials, .variables = c(\"Subject\", \"Type\"), function(x) trial.cor = cor(x$Trial1, x$Trial2))\ntestTMA.corr$trial.corr <- abs(testTMA.corr$V1)\n\nggplot(testTMA.corr, aes(x = Type, y = trial.corr)) +\n  geom_point() +\n  facet_wrap(~Subject)\n\nggplot(testTMA.corr, aes(x = Type, y = trial.corr, color = factor(Subject))) +\n  geom_point() \n\n",
+    "created" : 1501784138764.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3527033457",
+    "id" : "8CEAC0B4",
+    "lastKnownWriteTime" : 1501785549,
+    "path" : "/Volumes/storage/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis_DB/Test-Retest for Trial 1 Data.R",
+    "project_path" : "Test-Retest for Trial 1 Data.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "#Experiment 1 Graphs with curves\n\n#Import Libraries####\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(drc)\nlibrary(sandwich)\nlibrary(lmtest)\nlibrary(multcomp)\nlibrary(readr)\nlibrary(tibble)\nlibrary(tidyr)\nlibrary(purrr)\nlibrary(rlist)\nlibrary(stringr)\nlibrary(pipeR)\nlibrary(rvest)\nlibrary(ggplot2)\nlibrary(gridExtra)\nlibrary(rsvg)\nlibrary(naturalsort)\n\n#Import Data\nsubj <- dir(path = \"/Volumes/mainland/Projects/TMA\\ blocker/SupraStyle/Data/Raw\\ Data/Test1_olfactometer\", pattern=\"\\\\.txt$\", full.names=TRUE)# on mac - creating a list of all file names\nnames(subj)  <- basename(subj)\ndf  <- ldply(subj, read.delim, stringsAsFactors=FALSE) \n\n#subset variables\ndf <- subset(df, select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"TrainList\", \"Running.Block.\", \"IntensityRating\"))\ndf$IntensityRating.inv <- 580-as.integer(df$IntensityRating)\n\n#Trial Data\ndf.trial <- subset(df, Running.Block. == \"Test\", select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"Running.Block.\", \"IntensityRating.inv\"))\n\n#import the file that has the trial types\nvalve.list <- read.csv(\"/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/TMA_supra_highTMA_merge.csv\") #for a mac\n\n#merge with trial list\ndf.trial_merge <- merge(df.trial, valve.list)\n\n#visualize data\nggplot(df.trial_merge, aes(x = Concentration, y = IntensityRating.inv, color = Type)) +\n  geom_point() +\n  facet_wrap(~Type)\n",
+    "created" : 1502207671600.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3904611983",
+    "id" : "9AF6933F",
+    "lastKnownWriteTime" : 1502207899,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/Experiment1_graphs_withCurves.R",
+    "project_path" : "Analysis/Experiment1_graphs_withCurves.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

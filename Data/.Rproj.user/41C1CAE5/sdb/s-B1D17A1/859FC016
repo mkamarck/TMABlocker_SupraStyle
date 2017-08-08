@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1496677702441.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "859FC016",
+    "lastKnownWriteTime" : 37446475529060351,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "j31w8uc4w4",
+        "caption" : "subj1.TMA",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=subj1.TMA&cache_key=j31w8uc4w4",
+        "displayedObservations" : 12,
+        "environment" : "",
+        "object" : "subj1.TMA",
+        "totalObservations" : 12,
+        "variables" : 13
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

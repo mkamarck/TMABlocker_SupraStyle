@@ -1,0 +1,46 @@
+[Screen1]
+	Welcome to our Experiment!
+
+	Please read the following instructions carefully.
+
+[Screen2]
+	We will present a variety of odors to you and your task will be to rate the intensity of each odor. 
+	
+	Intensity means how STRONG the odor is
+
+[Screen3]
+	There will be three training sessions to familiarize you with our set-up.
+
+[Screen4]
+	The first training session is to learn how to use the scale.
+
+	Please answer the following questions.
+
+[Screen5]
+	The second session is to practice rating the intensity of odors.
+
+[Screen6]
+	There will be a three-second countdown, at "1" please place your nose into the nose-piece and sniff. 
+
+	{Please prepare to smell}
+	{3, 2, 1}
+	
+[Screen7]
+	In between odors, there will be a short game.
+	
+	In the game, you will use the mouse to avoid obstacles until you reach the end of the level.
+
+[Screen8]
+	The game will start now.
+
+[Screen9]
+	The third training will be odor trials without guidance.
+
+[Screen10]
+	Now we will begin the actual experiment.
+
+	Are you ready?
+
+[Screen11]
+	Session Complete
+	Thank you for participating in our experiment!

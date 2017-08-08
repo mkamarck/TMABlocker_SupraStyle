@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1500913817229.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D10EA105",
+    "lastKnownWriteTime" : 8243112767786869296,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "j9ampcdvxe",
+        "caption" : "df.scale.prevConc",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df.scale.prevConc&cache_key=j9ampcdvxe",
+        "displayedObservations" : "120",
+        "environment" : "",
+        "object" : "df.scale.prevConc",
+        "totalObservations" : "120",
+        "variables" : "9"
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

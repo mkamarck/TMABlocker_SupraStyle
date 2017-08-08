@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1501784343552.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "2E43952A",
+    "lastKnownWriteTime" : 5994135408972361580,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "t7el1plnu9",
+        "caption" : "TMAretest.df",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=TMAretest.df&cache_key=t7el1plnu9",
+        "displayedObservations" : 12,
+        "environment" : "",
+        "object" : "TMAretest.df",
+        "totalObservations" : 12,
+        "variables" : 8
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

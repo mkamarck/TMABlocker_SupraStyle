@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1496677609350.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AC621637",
+    "lastKnownWriteTime" : 37446471691141251,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "1a5xg0nk7h",
+        "caption" : "TMA.sort",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=TMA.sort&cache_key=1a5xg0nk7h",
+        "displayedObservations" : 41,
+        "environment" : "",
+        "object" : "TMA.sort",
+        "totalObservations" : 41,
+        "variables" : 13
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

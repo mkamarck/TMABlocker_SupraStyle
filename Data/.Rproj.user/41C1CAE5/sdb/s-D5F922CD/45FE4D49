@@ -1,0 +1,18 @@
+{
+    "contents" : "#Import Libraries\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(pipeR)\n\n#Import Data\nsubj <- dir(path = \"Raw Data\", pattern=\"\\\\.txt$\", full.names=TRUE)# creating a list of all file names\nnames(subj)  <- basename(subj)\ndf  <- ldply(subj, read.delim, stringsAsFactors=FALSE) \n\n#subset variables\ndf <- subset(df, select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"TrainList\", \"Running.Block.\", \"IntensityRating\"))\ndf$IntensityRating.inv <- 580-as.integer(df$IntensityRating)\n\n#Trial Data\ndf.trial <- subset(df, Running.Block. == \"Test\", select = c(\"Subject\", \"Trial\", \"valve\", \"valve2\", \"Running.Block.\", \"IntensityRating.inv\"))\n#write.csv(df.trial, \"TMA_supra_9.csv\") #give this to Dardalie to import\n\n#import the file that has the trial types\n#valve.list <- read.csv(\"Analysis/TMA_supra_Pilot_merge.csv\")\nvalve.list <- read.csv(\"Analysis/TMA_supra_highTMA_merge.csv\")\n\n#merge with trial list\ndf.trial_merge <- merge(df.trial, valve.list)\n\n#graph\nggplot(data = subset(df.trial_merge, Subject %in% c(9,10)), aes(x = Concentration, y = IntensityRating.inv, color = factor(Subject))) +\n  geom_point() +\n  facet_wrap(~Type)\n\n# test <- subset(df.trial, Subject == 10)\n# test[which(test$valve == 32),]\n\n",
+    "created" : 1499285634879.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "543229494",
+    "id" : "45FE4D49",
+    "lastKnownWriteTime" : 1499463708,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/TMABlockSupra_Analysis.R",
+    "project_path" : "Analysis/TMABlockSupra_Analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

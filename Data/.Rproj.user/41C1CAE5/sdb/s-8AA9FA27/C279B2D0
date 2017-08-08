@@ -1,0 +1,17 @@
+{
+    "contents" : "#Import Libraries\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(plotrix)\n# library(nls2)\n\n####practice with glm#####\nsmall.scale <- df.scale[(1:80),]\n#Look at subject 9\nsmall.scale <- subset(df.scale, Subject == 35 & Type == \"Linalool\")\ndata.model <- subset(small.scale, select = c(\"Concentration\", \"IntensityRating.inv\"))\n\n# norm.values <- as.data.frame(small.scale$normValue)\n# conc <- as.data.frame(small.scale$Concentration)\n# norm.Intes.val <- as.double(unlist(norm.values))\n# Conc.list<- as.numeric(unlist(conc))\n# dat=as.data.frame(cbind(Conc.list,norm.Intes.val)) \n\nplot(Conc.list,norm.Intes.val,xlab=\"conc\",ylab=\"normintensity\")\ng <- glm(norm.Intes.val~Conc.list,family=quasibinomial,dat)\ncurve(predict(g,data.frame(Conc.list=x),type=\"resp\"),add=TRUE)\n# points(Conc.list,fitted(g),pch=20) - OPTIONAL, adds points to curve\n\n\n#Mk rewrite plot command\nmodel.glm <- glm(IntensityRating.inv~Concentration, data = small.scale)\nsummary(model.glm)  \n\n#Linalool graph for subject 9\nggplot(small.scale, aes(x = Concentration, y = IntensityRating.inv)) +\n  geom_point() +\n  geom_smooth()\n\n#example function#####\n#modelTAAR5 <- drm(formula = norm ~ TMAConcentration, data = df.mm1[complete.cases(df.mm1),], fct = LL.4(fixed=c(1,NA,NA,NA),names=(c(\"Slope\", \"Top\", \"Bottom\", \"ED\"))))\n# orig1 = function(x){summary(modelTAAR5.orig)$coefficients[2,1] + (summary(modelTAAR5.orig)$coefficients[1,1]-summary(modelTAAR5.orig)$coefficients[2,1])/(1+10^((log10(summary(modelTAAR5.orig)$coefficients[3,1]) - x)*1))}\n# orig2 = function(x){summary(modelRho.orig)$coefficients[2,1] + (summary(modelRho.orig)$coefficients[1,1]-summary(modelRho.orig)$coefficients[2,1])/(1+10^((log10(summary(modelRho.orig)$coefficients[3,1]) - x)*1))}\n# stat_function(fun = eq1, colour = \"#00BFC4\") +  \n\n#run HIll model#####\n#subset - you can change the inside to anything!\nsmall.scale <- subset(df.scale, Subject == 35 & Type == \"Linalool\")\nsmall.scale$concentration.log <- log10(small.scale$Concentration)\n\nmodel.linalool <- drm(formula = IntensityRating.inv~Concentration, data = small.scale, fct = LL.4(fixed = c(1, NA, NA, NA), names = (c(\"Slope\", \"Top\", \"Bottom\", \"ED\"))))\nsummary(model.linalool)    \nlinalool.graph = function(x){\n  summary(model.linalool)$coefficients[2,1] + (summary(model.linalool)$coefficients[1,1]-summary(model.linalool)$coefficients[2,1])/(1+10^((log10(summary(model.linalool)$coefficients[3,1]) - x)*1))\n}\n\nggplot(small.scale, aes(x = concentration.log, y = IntensityRating.inv)) +\n  geom_point() +\n  stat_function(fun = linalool.graph)\n\n\n                ",
+    "created" : 1500493078062.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "7|21|32|15|\n34|17|38|50|\n",
+    "hash" : "3885627578",
+    "id" : "C279B2D0",
+    "lastKnownWriteTime" : 1500495583,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis_DB/Sample_Applying Function_MK.R",
+    "project_path" : "Analysis_DB/Sample_Applying Function_MK.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

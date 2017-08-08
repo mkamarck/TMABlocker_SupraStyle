@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1501784747173.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D140C80D",
+    "lastKnownWriteTime" : 5994135407170682880,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "xd7w3tasf4",
+        "caption" : "testTMA.trials",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=testTMA.trials&cache_key=xd7w3tasf4",
+        "displayedObservations" : 6,
+        "environment" : "",
+        "object" : "testTMA.trials",
+        "totalObservations" : 6,
+        "variables" : 8
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

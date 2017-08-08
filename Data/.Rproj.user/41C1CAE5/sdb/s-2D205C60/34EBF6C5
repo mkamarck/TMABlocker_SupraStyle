@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1500910738447.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "34EBF6C5",
+    "lastKnownWriteTime" : 7816406529744203776,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "5x06ptpty5",
+        "caption" : "subTrials",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=subTrials&cache_key=5x06ptpty5",
+        "displayedObservations" : 30,
+        "environment" : "",
+        "object" : "subTrials",
+        "totalObservations" : 30,
+        "variables" : 7
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

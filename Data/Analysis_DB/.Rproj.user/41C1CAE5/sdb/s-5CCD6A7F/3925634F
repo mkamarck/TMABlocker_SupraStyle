@@ -1,0 +1,17 @@
+{
+    "contents" : "#Import Libraries\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(plotrix)\nlibrary(nls2)\n\n\nsmall.scale <- df.scale[(1:80),]\nnorm.values <- as.data.frame( normvalues <- small.scale$normValue)\nconc <- as.data.frame(small.scale$Concentration)\nnorm.Intes.val <- as.numeric(unlist(norm.values))\nConc.list<- as.numeric(unlist(conc))\ndat=as.data.frame(cbind(Conc.list,norm.Intes.val)) \nplot(Conc.list,norm.Intes.val,xlab=\"conc\",ylab=\"normintensity\")\ng <- glm(norm.Intes.val~Conc.list,family=quasibinomial,dat)\ncurve(predict(g,data.frame(Conc.list=x),type=\"resp\"),add=TRUE)\n# points(Conc.list,fitted(g),pch=20) - OPTIONAL, adds points to curve",
+    "created" : 1500492955896.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2354952462",
+    "id" : "3925634F",
+    "lastKnownWriteTime" : 1500492674,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis_DB/Sample_Applying Function.R",
+    "project_path" : "Sample_Applying Function.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

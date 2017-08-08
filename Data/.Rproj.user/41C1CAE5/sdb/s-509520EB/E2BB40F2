@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1501771183131.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E2BB40F2",
+    "lastKnownWriteTime" : 8243112767786869248,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "d0utdt33m1",
+        "caption" : "nostriltyperelabel",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=nostriltyperelabel&cache_key=d0utdt33m1",
+        "displayedObservations" : 15,
+        "environment" : "",
+        "object" : "nostriltyperelabel",
+        "totalObservations" : 15,
+        "variables" : 5
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

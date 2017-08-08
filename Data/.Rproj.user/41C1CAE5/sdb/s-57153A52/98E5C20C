@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1499463728962.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "98E5C20C",
+    "lastKnownWriteTime" : 4294967296,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "2rgyfio85y",
+        "caption" : "df.training",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df.training&cache_key=2rgyfio85y",
+        "displayedObservations" : 20,
+        "environment" : "",
+        "object" : "df.training",
+        "totalObservations" : 20,
+        "variables" : 7
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

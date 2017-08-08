@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1502207882453.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "58382944",
+    "lastKnownWriteTime" : 31525687025139712,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "1m4rq1nxze",
+        "caption" : "df.trial_merge",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df.trial_merge&cache_key=1m4rq1nxze",
+        "displayedObservations" : 224,
+        "environment" : "",
+        "object" : "df.trial_merge",
+        "totalObservations" : 224,
+        "variables" : 8
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

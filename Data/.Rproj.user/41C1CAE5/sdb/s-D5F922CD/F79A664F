@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1499462955298.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F79A664F",
+    "lastKnownWriteTime" : 4475623168,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "qhijx8f7xf",
+        "caption" : "dfSubset",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=dfSubset&cache_key=qhijx8f7xf",
+        "displayedObservations" : 208,
+        "environment" : "",
+        "object" : "dfSubset",
+        "totalObservations" : 208,
+        "variables" : 6
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1501022035984.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "757B7740",
+    "lastKnownWriteTime" : -2305843008930117632,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "nboyoc82ch",
+        "caption" : "test",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=test&cache_key=nboyoc82ch",
+        "displayedObservations" : 43,
+        "environment" : "",
+        "object" : "test",
+        "totalObservations" : 43,
+        "variables" : 8
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

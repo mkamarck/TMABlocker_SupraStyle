@@ -1,0 +1,17 @@
+{
+    "contents" : "#Import Libraries####\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(plotrix)\n#library(nls2)\nlibrary(drm)\n\n\nsmall.scale <- subset(df.scale, Subject == 9 & Type == \"Linalool\")\ndata.model <- subset(small.scale, select = c(\"Concentration\", \"IntensityRating.inv\")) \n# selects two columns of df.scale and makes a new df, data.model\n\n#Linalool graph for subject 9\nggplot(small.scale, aes(x = Concentration, y = IntensityRating.inv)) +\n  geom_point() +\n  geom_smooth()\n\n#run HIll model#####\n#subset - imputs log10 of concentration column in small.scale into new conc.log column\nsmall.scale$concentration.log <- log10(small.scale$Concentration)\n\n\nmodel.linalool <- drm(formula = IntensityRating.inv~Concentration, data = small.scale, fct = LL.4(fixed = c(1, NA, NA, NA), names = (c(\"Slope\", \"Top\", \"Bottom\", \"ED\"))))\nsummary(model.linalool)    \nlinalool.graph = function(x){\n  summary(model.linalool)$coefficients[2,1] + (summary(model.linalool)$coefficients[1,1]-summary(model.linalool)$coefficients[2,1])/(1+10^((log10(summary(model.linalool)$coefficients[3,1]) - x)*1))\n}\n\n#drm is dose response model function , summary give sum. stats , \n#LL.4 sets the 4 parameters of sigmoid curve ( slope at 1, looking for other)\nggplot(small.scale, aes(x = concentration.log, y = IntensityRating.inv)) +\n  geom_point() +\n  stat_function(fun = linalool.graph)\n\n\n",
+    "created" : 1500492955896.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2640297130",
+    "id" : "3925634F",
+    "lastKnownWriteTime" : 1500570282,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis_DB/Sample_Applying Function.R",
+    "project_path" : "Sample_Applying Function.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

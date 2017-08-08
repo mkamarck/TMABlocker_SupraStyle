@@ -1,0 +1,18 @@
+{
+    "contents" : "\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\n\n\n#sample scale script\n\n#scale function\nscale01 <- function(value, minValue, maxValue) {\n  (value - minValue)/(maxValue - minValue)\n}\n\n#returns dataframe with the minimum and maximum values for each subject\nsubjMinMax <- ddply(df.trial_merge, .variables = c(\"Subject\"), .fun = summarize, minValue = min(IntensityRating.inv), maxValue = max(IntensityRating.inv))\n#merges the max and min values with the full dataframe\ndf.scale <- merge(df.trial_merge, subjMinMax)\n#calculates the normalized values using the scale function as written\ndf.scale$normValue <- scale01(df.scale$IntensityRating.inv, df.scale$minValue, df.scale$maxValue)\n\n\n\n#another way to scale\ndf.trial_merge$norm.data <- ddply(df.trial_merge, .variables = c(\"Subject\"), .fun = summarize, scale(IntensityRating.inv))\n",
+    "created" : 1500913174440.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3077969005",
+    "id" : "D024CD62",
+    "lastKnownWriteTime" : 1499956780,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis_DB/scale_sampleScript.R",
+    "project_path" : "Analysis_DB/scale_sampleScript.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

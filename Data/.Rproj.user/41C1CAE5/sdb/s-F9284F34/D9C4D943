@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1500494630027.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D9C4D943",
+    "lastKnownWriteTime" : 7816406529744203893,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "5nv9e94qfw",
+        "caption" : "small.scale",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=small.scale&cache_key=5nv9e94qfw",
+        "displayedObservations" : "12",
+        "environment" : "",
+        "object" : "small.scale",
+        "totalObservations" : "12",
+        "variables" : "12"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

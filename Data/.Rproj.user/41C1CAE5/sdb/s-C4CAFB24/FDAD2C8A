@@ -1,0 +1,18 @@
+{
+    "contents" : "#Import Libraries\nlibrary(reshape2)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(pipeR)\n\n#HINT: for 1 and 2, you may need to specify a directory path\n#1. import data\nread.csv()\n\n#2. import file that connects valve numbers to stimulus content \n\n#3. merge the files\nmerge()\n\n#4. graph the data with Concentration versus IntensityRating.inv\nggplot() +\n  #type of plot +\n  facet_wrap()#by Type \n\n\n#example of plot code (You won't need the subset bit of code for this)\nggplot(data =subset(meltOverallIntensity, variable %in% c(\"avgTMAalone\", \"avgGreenAlone\", \"avgOverallIntensity\")), aes(x = factor(variable), y = value, fill = variable)) +\n  geom_bar(stat = \"identity\") +\n  facet_grid(TMA.Conc~Subject) ",
+    "created" : 1498665973192.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2600200573",
+    "id" : "FDAD2C8A",
+    "lastKnownWriteTime" : 1498666419,
+    "path" : "/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/TMABlockSupra_analysis_DB.R",
+    "project_path" : "Analysis/TMABlockSupra_analysis_DB.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
