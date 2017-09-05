@@ -108,14 +108,24 @@ TR.allCombos <- merge(TR.allCombos, TR.34)
 #melt the data
 TR.allCombos.melt <- melt(TR.allCombos, c("Subject"))
 #visualize
+#png("Analysis/Figures/Test-Retest_Exp3_allCorrelations.png", height = 960, width = 1200)
 ggplot(TR.allCombos.melt, aes(x = factor(Subject), y = value, color = variable)) +
-  geom_point() +
-  ylim(0,1)
+  geom_point(aes(size = 10)) +
+  ylim(0,1) +
+  theme_bw() +
+  theme(text = element_text(size = 30), 
+        legend.position = "none") +
+  ylab("Test-Retest Correlation") +
+  xlab("Subjects") +
+  geom_hline(yintercept = 0.4) +
+  ggtitle("Test-Retest Correlation for All Trial Combinations in Experiment 3")
+  
 
 
 ############################################################################################################
 
 #Now try doing this by concentration as well
+#THIS DOESN"T WORK - becuase there is only one option for all of the concentrations so the standard deviation is 0; in other words, this isn't possible
 ############################################################################################################
 
 TrialSplit <- subset(Exp3retest.df, Trial <= 26)

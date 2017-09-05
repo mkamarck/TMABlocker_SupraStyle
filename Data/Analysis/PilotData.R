@@ -23,9 +23,11 @@ df.trial_merge <- merge(df.trial, valve.list)
 #lost some stuff, try graphing and get back to it. 
 
 #graph
+pdf("Analysis/pilotData.TMA.lowConcentrations.pdf", width = 8, height = 8)
 ggplot(data = subset(df.trial_merge), aes(x = Concentration, y = IntensityRating.inv, color = Type)) +
   geom_point() +
   facet_wrap(~Type)
+dev.off()
 
 
 
@@ -242,10 +244,11 @@ DR1$Session <- 1
 
 DR_sessions <- rbind(DR1, DR2) #bind databases together
 #graph
+#pdf("Analysis/Pilot.TMAHigherConcentration_.pdf", height = 8, width = 8)
 ggplot(data = DR_sessions, aes(x = TMA.Concentration, y = IntensityRating.inv, color = factor(Session))) +
   geom_point() +
   facet_wrap(~Subject, scales = "free") 
-
+#dev.off()
 
 ####Jon ran it twice - compare his two runs####
 #import

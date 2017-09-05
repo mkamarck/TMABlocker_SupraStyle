@@ -1,0 +1,618 @@
+---
+title: "TMABlockSupraStyle_MSAP_summer2017"
+output: pdf_document
+geometry: margin=0.4in
+---
+
+#Intro
+We ran several experiments this summer becuase TMA was giving us problems. 
+  
+##Experiment 1: 
+Original planned experiment. TMA, Linalool, and trans-2-nonen-1-ol were run at 6 different concentrations. Mixtures of all of them were also run, paired-wise. For example, the lowest concentration of TMA was mixed with the lowest concentration of linalool for all of the concentrations (See Experiment Setup for more info). 
+All of the mixtures were combined: TMA + linalool, TMA + trans-2-nonen-1-ol, and linalool + trans-2-nonen-1-ol. 
+The goal was to collect dose-response curves for all of the individual components and their mixtures and then model them. We were expecting the modeling of linalool plus trans-2-nonen-1-ol and TMA + linalool to be more additive than TMA + trans-2-nonen-1-ol. 
+
+Here are some of the initial results:  
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message = FALSE, warning = FALSE, tidy = TRUE)
+```
+
+```{r, include = FALSE}
+#Experiment 1 Graphs with curves
+
+#Import Libraries####
+library(reshape2)
+library(ggplot2)
+library(plyr)
+library(drc)
+library(sandwich)
+library(lmtest)
+library(multcomp)
+library(readr)
+library(tibble)
+library(tidyr)
+library(purrr)
+library(rlist)
+library(stringr)
+library(pipeR)
+library(rvest)
+library(ggplot2)
+library(gridExtra)
+library(rsvg)
+library(naturalsort)
+
+#Import Data
+subj <- dir(path = "/Volumes/mainland/Projects/TMA\ blocker/SupraStyle/Data/Raw\ Data/Test1_olfactometer", pattern="\\.txt$", full.names=TRUE)# on mac - creating a list of all file names
+names(subj)  <- basename(subj)
+df  <- ldply(subj, read.delim, stringsAsFactors=FALSE) 
+
+#subset variables
+df <- subset(df, select = c("Subject", "Trial", "valve", "valve2", "TrainList", "Running.Block.", "IntensityRating"))
+df$IntensityRating.inv <- 580-as.integer(df$IntensityRating)
+
+#Trial Data
+df.trial <- subset(df, Running.Block. == "Test", select = c("Subject", "Trial", "valve", "valve2", "Running.Block.", "IntensityRating.inv"))
+
+#import the file that has the trial types
+valve.list <- read.csv("/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/TMA_supra_highTMA_merge.csv") #for a mac
+
+#merge with trial list
+df.trial_merge <- merge(df.trial, valve.list)
+
+
+#Make all the blanks the same type
+df.trial_merge$Type_new <- as.factor(df.trial_merge$Type)
+for (i in 1:length(df.trial_merge$Type)){
+  if(df.trial_merge$Type[i] %in% c("Blank 1", "Blank 2", "blank combo", "Blank combo")){
+    df.trial_merge$Type_new[i] <- "Blank 1"
+  }  
+}
+```
+First we conducted a test-retest analysis to determine how variable the subject data was. We eliminated Subjects with 5 test-retest correlation values lower than 0.75. Each test-retest value was for how a participant performed on a Type of odor stimulus  
+  
+```{r fig1, fig.height = 8, fig.width=8, echo = FALSE}
+#eliminate subjects with low test-retest values
+#For Test-Retest######
+TMAretest.df <- df.trial_merge
+
+#Setup df that splits and renames IntensityRating as Trial1/Trial2
+
+TMAretestRename1 <- subset(TMAretest.df,Trial<= 40)# df with Inten.Rate from  trial 1 
+TMAretestRename2 <- subset(TMAretest.df,Trial> 40)#df with Inten.Rate from  trial 2
+TMAretestRename1 <- TMAretestRename1[,-4] #get rid of trial numbers
+TMAretestRename2 <- TMAretestRename2[,-4] #get rid of trial numbers
+colnames(TMAretestRename1)[5] <- "Trial1"  # rename Intensity column "trial1"
+colnames(TMAretestRename2)[5] <- "Trial2"
+testTMA.trials <- merge(TMAretestRename1,TMAretestRename2)#merge the dataframes
+
+#graph the trial1 v trial2
+ggplot(data = subset(testTMA.trials), aes(x = Trial1, y = Trial2, color = Type_new)) +
+  geom_point() +
+  facet_wrap(~Subject) +
+  ggtitle("Test-Retest by Subject")
+```
+```{r fig 2, fig.height = 8, fig.width = 8, echo = FALSE}
+#calculate the correlation coefficient
+testTMA.corr <- ddply(testTMA.trials, .variables = c("Subject", "Type_new"), function(x) trial.cor = cor(x$Trial1, x$Trial2))
+testTMA.corr$trial.corr <- abs(testTMA.corr$V1)#takes abs. value of correlation values
+#plot the test-retest correlation values per subject
+ggplot(testTMA.corr, aes(x = Type_new, y = trial.corr)) +
+  geom_point() +
+  facet_wrap(~Subject) +
+  ylab("Pearson's Correlation") +
+  xlab("Type of Odor Stimulus") +
+  ggtitle("Individual Subject's Pearson's correlation value across the different stimulus types")+
+  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
+```
+  
+We excluded subjects: 14, 16, 18, and 36 using the above criteria.  
+  
+```{r fig3, fig.width = 8, fig.height = 8, echo = FALSE}
+#visualize data - graph everyone together without normalizing
+ggplot(subset(df.trial_merge, !Subject %in% c(14, 16, 18, 36)), aes(x = Concentration, y = IntensityRating.inv, color = Type_new)) +
+  geom_point() +
+  facet_wrap(~Type_new) +
+  ggtitle("Raw Data from All Subjects for different stimulus types")+
+  xlab("Concentration (arbitrary units)") +
+  ylab("Intensity Rating") +
+  scale_y_continuous(limits = c(0, 500), breaks = c(0, 7, 30.5, 17.2*5, 35.4*5, 53.3*5, 500), labels = c("", "Barely detectable", "Weak", "Moderate", "Strong", "Very strong", "Strongest Odor Imaginable"))
+  
+#scale data
+df.scale <- ddply(.data = df.trial_merge, .variables = c("Subject"), .fun = mutate, normIntensity = scale(IntensityRating.inv))
+
+#graph everyone together with normalizing
+ggplot(subset(df.scale, !Subject %in% c(14, 16, 18, 36)), aes(x = Concentration, y = normIntensity, color = Type_new)) +
+  geom_point() +
+  facet_wrap(~Type_new)+
+  ggtitle("Normalized data from all Subjects for different stimulus types")+
+  xlab("Concentration (arbitrary units)") +
+  ylab("Intensity Rating (normalized; arbitrary units)")
+```
+  
+I can fit dose-response curves to these, but most of them look really questionable:  
+  
+```{r fig4, fig.height = 4, fig.width = 4, echo = FALSE, warning=FALSE }
+ 
+################################################################
+
+##################write the hill function - outputs the predicted values and stuff you need to make the graph#####
+
+################################################################
+HillEquationFit <- function(temp_data, form, normalized = FALSE){
+  temp_conc <- temp_data %>>% (.$Concentration) %>>% sort() %>>% unique() #
+  min_conc <- min(temp_conc[temp_conc != 0])
+  max_conc <- max(temp_conc)
+  if(!normalized){
+    top_upper = 500
+    low_bottom = 0
+  }
+  else{
+    top_upper = 10
+    low_bottom = -5
+  }
+  
+  temp_fit <- drm(form, 
+                  data = temp_data, 
+                  lowerl = c(-4*log(10), low_bottom, low_bottom, min_conc), #had to change the limits for the normalization process.
+                  upperl = c(0, top_upper, top_upper, NA), #why is slope upperlimit equal to zero? 
+                  fct = LL.4())
+  #using LL.4 instead of L.4 becuase the function actually seems to fit here! - not sure the difference, maybe in inputting logarhythms or something
+  #print(summary(temp_fit))
+  #make prediction dataframe
+  new_data_for_plot <- expand.grid(Concentration = seq(min_conc, max_conc, length.out = 1000))
+  # predictions and confidence intervals
+  pm <- predict(temp_fit, newdata = new_data_for_plot, interval = "confidence") %>>% data.frame()
+  ##new_data_for_plot <- bind_cols(new_data_for_plot, pm) 
+  new_data_for_plot <- cbind(new_data_for_plot, pm)
+  #find mean and SEM
+  return(new_data_for_plot)
+}
+
+################################################################
+
+#Fit curves to all graphs NORMALIZED DATA
+
+################################################################
+df.scale <- subset(df.scale, Type_new != "Blank 1")
+for (i in unique(df.scale$Type_new)){
+  temp_data <- subset(df.scale, Concentration !=0 & !Subject %in% c(14, 16, 18, 36) & Type == i)
+  form <- formula("normIntensity ~ Concentration")
+  new_data_for_plot <- HillEquationFit(temp_data, form, normalized = TRUE)
+#make the summary information to graph
+  summary_test <- ddply(temp_data, .variables = c("Concentration"), .fun = summarize, Intensity = mean(normIntensity), se = sd(normIntensity)/sqrt(length(normIntensity)))
+  
+#plot
+  print(ggplot(summary_test, aes(x = Concentration, y = Intensity)) +
+      geom_point() +
+      geom_line(data = new_data_for_plot, aes(x = Concentration, y = Prediction)) +
+      geom_ribbon(data = new_data_for_plot, aes(x = Concentration, y = Prediction, ymin = Lower, ymax = Upper), alpha = 0.1) +
+      geom_errorbar(data = summary_test, aes(y = Intensity, ymin = Intensity - se, ymax = Intensity + se), width = 0.1) +
+      ggtitle(paste("Type = ", i))  +
+      ylim(-1.5, 2.5) +
+      theme(legend.position = "none")
+  )
+}
+
+########################################################################################
+#save the TMA graph for later comparison to that for experiment 3
+########################################################################################
+temp_data <- subset(df.trial_merge, Concentration !=0 & !Subject %in% c(14, 16, 18, 36) & Type == "TMA")
+form <- formula("IntensityRating.inv ~ Concentration")
+new_data_for_plot <- HillEquationFit(temp_data, form, normalized = FALSE)
+#summarize data
+summary_test <- ddply(temp_data, .variables = c("Concentration"), .fun = summarize, Intensity = mean(IntensityRating.inv), se = sd(IntensityRating.inv)/sqrt(length(IntensityRating.inv)))
+#plot - save
+plot.experiment1 <- ggplot(summary_test, aes(x = Concentration, y = Intensity)) +
+  geom_point() +
+  geom_line(data = new_data_for_plot, aes(x = Concentration, y = Prediction)) +
+  geom_ribbon(data = new_data_for_plot, aes(x = Concentration, y = Prediction, ymin = Lower, ymax = Upper), alpha = 0.1) +
+  geom_errorbar(data = summary_test, aes(y = Intensity, ymin = Intensity - se, ymax = Intensity + se), width = 0.1) + # error bars of samples
+  #scale_y_continuous(limits = c(0, 100), breaks = c(0, 1.4, 6.1, 17.2, 35.4, 53.3, 100), labels = c("", "Barely detectable", "Weak", "Moderate", "Strong", "Very strong", "Strongest imaginable \nsensation of any kind")) + 
+  scale_y_continuous(limits = c(0, 53.3*5), breaks = c(0, 7, 30.5, 17.2*5, 35.4*5, 53.3*5), labels = c("", "Barely detectable", "Weak", "Moderate", "Strong", "Very strong")) +#yusuke's line *5 +
+  ggtitle("Experiment 1 TMA DR") +
+  theme_bw()
+
+```
+  
+These don't look as bad as the raw data.  
+  
+Overall, the test-retest of TMA (which is the compound we are most interested in) is really poor, meaning that people are still not very good at doing this task. We don't know if this is the task, olfactometer, or if some people just don't smell TMA that well (or aren't that good at the task overall).  
+  
+The task shouldn't be hard because suprathreshold was pretty successful. Here we can see that people do pretty well at rating LInalool intensity, especially compared to TMA. 
+
+```{r}
+ggplot(subset(testTMA.corr, Type_new %in% c("TMA", "Linalool") & !Subject %in% c("14","16","18","36")), aes(x = Type_new, y = trial.corr, color = factor(Subject), group = Subject)) +
+  geom_point() +
+  geom_line()+
+  ggtitle("Test-Retest Correlation Of TMA versus Linalool") +
+  xlab("") + 
+  ylab("Intensity Rating Correlation Coefficient")#+
+  #theme(legend.position = "none")
+```  
+  
+```{r}
+unityLine <- subset(testTMA.corr, Type_new %in% c("TMA", "Linalool") & !Subject %in% c("14","16","18","36"))
+unityLine.cast <- dcast(unityLine, Subject~Type_new, value.var = "trial.corr")
+
+#Another option for comparing TMA to Linalool in terms of consistency####  
+ggplot(unityLine.cast, aes(x = Linalool, y = TMA, color = factor(Subject))) +
+  geom_point(aes(size = 6)) +
+  geom_abline(a = 0, y = 1)+
+  xlim(0, 1) +
+  ylim(0, 1) +
+  ggtitle("Experiment 1: Test-Retest Correlation of Linalool versus TMA") +
+  xlab("Linalool Test-Retest Correlation Coefficient") + 
+  ylab("TMA Test-Retest Correlation Coefficient")+
+  theme_bw() +
+  theme(legend.position = "none")
+```
+  
+Dots below the unity line are subjects who were more consistent at rating linalool than TMA. 
+
+#Experiment 2:
+The question is: can participant even smell TMA?  
+We presented all of the same concentrations of TMA out of jars to see if the problem is our dilutions of TMA or the olfactometer itself. 
+
+```{r, fig5, fig.height = 8, fig.width = 8 }
+#Import Data####
+subj <- dir(path = "/Volumes/mainland/Projects/TMA\ blocker/SupraStyle/Data/Raw Data/TMA_DR_jars", pattern="\\.txt$", full.names=TRUE) # creating a list of all file names
+names(subj)  <- basename(subj)
+df <- ldply(subj, read.delim, stringsAsFactors=FALSE) 
+
+#subset the data
+df.jars <- subset(df, select = c("Subject", "Trial", "Running.Block.", "IntensityRating","Jar","Concentration", "Session")) 
+df.jars$IntensityRating.inv <- 580-as.integer(df.jars$IntensityRating)
+
+#Trial Data
+df.trialJars <- subset(df.jars, Running.Block. == "Test" , select = c("Subject", "Trial",  "Running.Block.", "IntensityRating.inv", "Jar", "Concentration", "Session"))
+
+#Normalize####
+df.scaleJars <- ddply(df.trialJars, .variables = c("Subject"), .fun = mutate, normIntensity = scale(IntensityRating.inv))
+
+#Plot all Subjects####
+#plot without 1000 becuase that's Dardalie and her data looks different
+#plot all subjects raw data
+ggplot(data = subset(df.jars, Subject !=1000), aes(x = Concentration, y = IntensityRating.inv, color = factor(Running.Block.))) +
+  geom_point() +
+  facet_wrap(~Subject) +
+  xlab("Concentration of TMA (mM)") +
+  ylab("Intensity Rating") +
+  ggtitle("Intensity Rating from Jars of TMA") +
+  scale_y_continuous(limits = c(0, 500), breaks = c(0, 7, 30.5, 17.2*5, 35.4*5, 53.3*5, 500), labels = c("", "Barely detectable", "Weak", "Moderate", "Strong", "Very strong", "Strongest Odor Imaginable"))
+
+#normalized
+# ggplot(data = subset(df.scaleJars, Subject !=1000), aes(x = Concentration, y = normIntensity, color = factor(Subject))) +
+#   geom_point() +
+#   xlab("Concentration of TMA (mM)") +
+#   ylab("normalized Intensity Rating") +
+#   ggtitle("Normalized Intensity Rating from Jars of TMA")
+```
+
+```{r, fig10, fig.height = 8, fig.width=8}
+##############################################################
+#Plot with Hill equation
+##########################################################################################
+temp_data <- subset(df.scaleJars, Concentration !=0 & Subject !=1000)
+form <- formula("normIntensity ~ Concentration")
+new_data_for_plot <- HillEquationFit(temp_data, form, normalized = TRUE)
+#make the summary information to graph
+summary_test <- ddply(temp_data, .variables = c("Concentration"), .fun = summarize, Intensity = mean(normIntensity), se = sd(normIntensity)/sqrt(length(normIntensity)))
+
+
+#plot
+ggplot(summary_test, aes(x = Concentration, y = Intensity)) +
+  geom_point() +
+  geom_line(data = new_data_for_plot, aes(x = Concentration, y = Prediction)) +
+  geom_ribbon(data = new_data_for_plot, aes(x = Concentration, y = Prediction, ymin = Lower, ymax = Upper), alpha = 0.1) +
+  geom_errorbar(data = summary_test, aes(y = Intensity, ymin = Intensity - se, ymax = Intensity + se), width = 0.1) +
+  ggtitle("Normalized Intensity of TMA DR in Jars")  +
+  ylim(-1.5, 2.5) +
+  theme(legend.position = "none") +
+  xlab("[TMA] mM") +
+  ylab("Normalized Intensity")
+```
+
+```{r, fig11, fig.height = 6, fig.width = 8 }
+###########################################################################################
+
+#Test-Retest Experiment 2
+
+###########################################################################################
+
+#make a new function
+testRetest <- function(Trial1, Trial2){
+  Trial1 <- Trial1[,c(-2,-3)]
+  Trial2 <- Trial2[,c(-2,-3)]
+  names(Trial1) = c("Subject", "trial1", "jar", "TMA.Concentration", "Session")
+  names(Trial2) = c("Subject", "trial2", "jar", "TMA.Concentration", "Session")
+  Trial.combo <- merge(Trial1, Trial2)#merge the dataframes
+  testRetest.Exp3 <- ddply(Trial.combo, .variables = c("Subject"), function(x) trial.cor = cor(x$trial1, x$trial2))
+  testRetest.Exp3$V1 <- abs(testRetest.Exp3$V1) #takes abs. value of correlation values
+  return(testRetest.Exp3)
+}
+
+#This experiment had three trials
+df.trialJars.sub <- subset(df.trialJars, Subject !=1000)
+Trial1 <- subset(df.trialJars.sub, Trial <= 10)
+Trial2 <- subset(df.trialJars.sub, Trial >10 & Trial <= 20)
+Trial3 <- subset(df.trialJars.sub, Trial >20)
+
+TRT.12 <- testRetest(Trial1, Trial2)
+TRT.13 <- testRetest(Trial1, Trial3)
+TRT.23 <- testRetest(Trial2, Trial3)
+TRT.all <- rbind(TRT.12, TRT.13)
+TRT.all <- rbind(TRT.all, TRT.23)
+
+TRT.12$Subject <- factor(TRT.12$Subject, levels = c(6,44,39,3,38,21))
+#visualize test-retest
+ggplot()+
+  geom_point(data = TRT.12, aes(x = factor(Subject), y = V1, size = 1, color = "1 v. 2 comparison"))+
+  geom_point(data = TRT.13, aes(x = factor(Subject), y = V1, color = "1 v. 3 comparison", size = 1))+
+  geom_point(data = TRT.23, aes(x = factor(Subject), y = V1, color = "2 v. 3 comparison", size = 1))+
+  ylim(0,1) +
+  ggtitle("Test-retest for jars (ploted in order of testing)") +
+  geom_abline(intercept= 0.5, slope = 0) +
+  xlab("Test-Retest Correlation") +
+  ylab("Subject") +
+  guides(shape = FALSE, fill = FALSE, alpha = FALSE, size = FALSE) + #the size one was the one that actually turned off this legend
+  theme(legend.title = element_blank())
+```
+  
+Most participants had acceptable test-retest scores. there may be some affect of time. There may also be an experimenter effect - the worst two were performed with Dardalie as the experimenter. Overall the rating still were not very high.  
+  
+Dardalie Brooks discovered while testing herself that agitating the tubes caused a higher rating for TMA.  
+  
+```{r, fig6, fig.height = 6, fig.width = 8}
+df.jars$Session2 <- factor(df.jars$Session, levels = c("1", "2"), labels = c("Not Agitated", "Agitated")) #this is how you change what the legend says
+#plot the data
+ggplot(data = subset(df.jars, Subject == 1000 & Session2 %in% c("Not Agitated", "Agitated")), aes(x = Concentration, y = IntensityRating.inv, color = Session2)) +
+  geom_point() +
+  ggtitle("Effect of agitating on TMA odor Intensity")+
+  xlab("Intensity Rating") +
+  ylab("Concentration of TMA")
+
+###########################################################################################################
+
+#fit hill model
+
+#############################################################################################################
+temp_data_notAgitated <- subset(df.jars, Subject == 1000 & Session2 == "Not Agitated") #try with 0 point, and then bring it in later if this doesn't work
+temp_data_agitated <- subset(df.jars, Subject == 1000 & Session2 == "Agitated") #try with 0 point, and then bring it in later if this doesn't work
+form <- formula("IntensityRating.inv ~ Concentration")
+new_data_for_plot_notAgitated <- HillEquationFit(temp_data_notAgitated, form, normalized = FALSE)
+new_data_for_plot_agitated <- HillEquationFit(temp_data_agitated, form, normalized = FALSE)
+#get mean and SEM
+summary_test <- ddply(.data = subset(df.jars, Subject == 1000 & Session2 %in% c("Not Agitated", "Agitated")), .variables = c("Concentration", "Session2"), .fun = summarize, Intensity = mean(IntensityRating.inv), se = sd(IntensityRating.inv)/sqrt(length(IntensityRating.inv)))
+summary_test[which(summary_test$Concentration == 0),]$Concentration <- .05
+
+#####################################################################################################################################################
+#plot with hill model
+#####################################################################################################################################################
+ggplot(summary_test, aes(x = Concentration, y = Intensity)) +
+  geom_point(aes(color = Session2)) +
+  scale_colour_manual(values = c("#00BFC4", "#F8766D", "#F8766D", "#00BFC4")) +
+  geom_line(data = new_data_for_plot_notAgitated, aes(x = Concentration, y = Prediction, color = "#00BFC4")) +
+  geom_ribbon(data = new_data_for_plot_notAgitated, aes(x = Concentration, y = Prediction, ymin = Lower, ymax = Upper, fill = "#F8766D"), alpha = 0.1) +
+  geom_line(data = new_data_for_plot_agitated, aes(x = Concentration, y = Prediction, color = "#F8766D")) +
+  geom_ribbon(data = new_data_for_plot_agitated, aes(x = Concentration, y = Prediction, ymin = Lower, ymax = Upper, fill = "#00BFC4"), alpha = 0.1) +
+  geom_errorbar(data = summary_test, aes(y = Intensity, colour = Session2, ymin = Intensity - se, ymax = Intensity + se), width = 0.1) + # error bars of samples
+  #scale_y_continuous(limits = c(0, 100), breaks = c(0, 1.4, 6.1, 17.2, 35.4, 53.3, 100), labels = c("", "Barely detectable", "Weak", "Moderate", "Strong", "Very strong", "Strongest imaginable \nsensation of any kind")) + 
+  scale_y_continuous(limits = c(0, 35.4*5), breaks = c(0, 7, 30.5, 17.2*5, 35.4*5), labels = c("", "Barely detectable", "Weak", "Moderate", "Strong")) +#yusuke's line *5 
+  ggtitle("Effect of Agitating Jars on TMA Odor Intensity")  +
+  xlab("log[TMA] (mM)") +
+  ylab("Intensity Rating") +
+  scale_x_log10() +
+  theme_bw() +
+  theme(legend.title = element_blank(), 
+        legend.position = "none")
+```
+  
+These two are not significantly different, but it is also one person. We decided that increasing the agitation of TMA is a good strategy for trying to increase the perceived intensity.  
+  
+#Experiment 3: TMA DR with olfactometer with bubbling through TMA.
+I created a jar top that allows for bubbling air through TMA using the olfactometer. Jars are difficult becuase TMA does not work on beads, which is the safe way to keep participants from spilling on themselves. Also the olfactometer is less subject to difficulties with participants not being able to complete an experiment. 
+Therefore we ran a number of participant on the TMA with agitation to see if this causes TMA to be rated as higher intensity and also whether it increases the test-retest for ratings of TMA. 
+This experiment had 4 stimulus presentations of a number several different concentrations of TMA that were equal to the concentrations of TMA presented in the first experiment. 
+
+```{r, fig7, fig.height = 8, fig.width = 8}
+subj <- dir(path = "/Volumes/mainland/Projects/TMA\ blocker/SupraStyle/Data/Raw Data/DR_Agitated", pattern="\\.txt$", full.names=TRUE)# creating a list of all file names
+names(subj)  <- basename(subj)
+df  <- ldply(subj, read.delim, stringsAsFactors=FALSE) 
+#subset variables
+df <- subset(df, select = c("Subject", "Trial", "valve", "valve2", "TrainList", "Running.Block.", "IntensityRating"))
+df$IntensityRating.inv <- 580-as.integer(df$IntensityRating)
+
+#Trial Data
+df.trial <- subset(df, Running.Block. == "Test", select = c("Subject", "Trial", "valve", "valve2", "Running.Block.", "IntensityRating.inv"))
+
+#name the trials based on valves
+valve.list <- read.csv("/Volumes/mainland/Projects/TMA blocker/SupraStyle/Data/Analysis/TMA_DR_merge.csv")
+
+#merge with trial list
+df.trial_merge <- merge(df.trial, valve.list)
+#put subjects in order
+df.trial_merge$Subject <- factor(df.trial_merge$Subject, levels = c(11, 50, 29, 33, 56, 49, 59, 58, 62, 54, 53))
+
+#graph
+ggplot(subset(df.trial_merge, Subject !=1000), aes(x = TMA.Concentration, y = IntensityRating.inv, colour = factor(valve2))) +
+  geom_point() +
+  facet_wrap(~Subject)
+```
+  
+Subjects are in order here, and odors were refreshed once in the middle of the experiment, but not from scratch - only from the solution that was already pHed.  
+  
+When we compare overall ratings of TMA from Experiment 1 to Experiment3, we see that experiment 3 has higher ratings. 
+```{r, fig8, fig.height = 4, fig.width = 4}
+################################################################
+
+#Fit curves to RAW TMA data - EXPERIMENT 3 ONLY
+#different function for experiment 3 becuase TMA concentration is labeled differently 
+################################################################
+HillEquationFit3 <- function(temp_data, form, normalized = FALSE){
+  temp_conc <- temp_data %>>% (.$TMA.Concentration) %>>% sort() %>>% unique() #
+  min_conc <- min(temp_conc[temp_conc != 0])
+  max_conc <- max(temp_conc)
+  if(!normalized){
+    top_upper = 500
+    low_bottom = 0
+  }
+  else{
+    top_upper = 10
+    low_bottom = -5
+  }
+  
+  temp_fit <- drm(form, 
+                  data = temp_data, 
+                  lowerl = c(-4*log(10), low_bottom, low_bottom, min_conc), #had to change the limits for the normalization process.
+                  upperl = c(0, top_upper, top_upper, NA), #why is slope upperlimit equal to zero? 
+                  fct = LL.4())
+  #using LL.4 instead of L.4 becuase the function actually seems to fit here! - not sure the difference, maybe in inputting logarhythms or something
+  #print(summary(temp_fit))
+  #make prediction dataframe
+  new_data_for_plot <- expand.grid(Concentration = seq(min_conc, max_conc, length.out = 1000))
+  # predictions and confidence intervals
+  pm <- predict(temp_fit, newdata = new_data_for_plot, interval = "confidence") %>>% data.frame()
+  ##new_data_for_plot <- bind_cols(new_data_for_plot, pm) 
+  new_data_for_plot <- cbind(new_data_for_plot, pm)
+  #find mean and SEM
+  return(new_data_for_plot)
+}
+#######################
+
+temp_data <- subset(df.trial_merge, TMA.Concentration !=0 & Subject !=1000)
+form <- formula("IntensityRating.inv ~ TMA.Concentration")
+new_data_for_plot <- HillEquationFit3(temp_data, form, normalized = FALSE)
+
+#test function plot
+# print(ggplot(temp_data, aes(x = TMA.Concentration, y = IntensityRating.inv)) +
+#         geom_point() +
+#         geom_line(data = new_data_for_plot, aes(x = Concentration, y = Prediction)) +
+#         geom_ribbon(data = new_data_for_plot, aes(x = Concentration, y = Prediction, ymin = Lower, ymax = Upper), alpha = 0.1) +
+#         ggtitle(paste("Test Graph for Type TMA"))
+# )
+#get mean and SEM
+summary_test <- ddply(temp_data, .variables = c("TMA.Concentration"), .fun = summarize, Intensity = mean(IntensityRating.inv), se = sd(IntensityRating.inv)/sqrt(length(IntensityRating.inv)))
+
+summary_test$Concentration <- log10(summary_test$TMA.Concentration)
+################################################################################################
+#plot
+################################################################################################
+ggplot(summary_test, aes(x = TMA.Concentration, y = Intensity)) +
+  geom_point() +
+  geom_line(data = new_data_for_plot, aes(x = Concentration, y = Prediction)) +
+  geom_ribbon(data = new_data_for_plot, aes(x = Concentration, y = Prediction, ymin = Lower, ymax = Upper), alpha = 0.1) +
+  geom_errorbar(data = summary_test, aes(y = Intensity, ymin = Intensity - se, ymax = Intensity + se), width = 0.1) + # error bars of samples
+  #scale_y_continuous(limits = c(0, 100), breaks = c(0, 1.4, 6.1, 17.2, 35.4, 53.3, 100), labels = c("", "Barely detectable", "Weak", "Moderate", "Strong", "Very strong", "Strongest imaginable \nsensation of any kind")) + 
+  scale_y_continuous(limits = c(0, 53.3*5), breaks = c(0, 7, 30.5, 17.2*5, 35.4*5, 53.3*5), labels = c("", "Barely detectable", "Weak", "Moderate", "Strong", "Very strong")) +#yusuke's line *5 +
+  ggtitle("Experiment 3 TMA DR") +
+  theme_bw() +
+  xlab("TMA Concentration (mM)") +
+  ylab("Intensity Ratings")
+
+print(plot.experiment1)
+
+```  
+  
+###Is the test-retest correlation better for TMA in the 3rd experiment than in the 1st experiment?  
+  
+```{r, fig9, fig.height=6, fig.width=8}
+###########################
+
+#Experiment 3 test-retest 
+
+####################################################################################
+Exp3retest.df <- subset(df.trial_merge, Subject!=1000)
+
+#original test-retest function
+correl.coeff <- function(Exp3retestT1, Exp3retestT2){
+  Exp3retestT1 <- Exp3retestT1[,-3] #get rid of column w/ trial and Session numbers
+  Exp3retestT2 <- Exp3retestT2[,-3]
+  names(Exp3retestT1) = c("valve", "Subject", "valve2", "Running.Block.", "trial1", "TMA.Concentration")
+  names(Exp3retestT2) = c("valve", "Subject", "valve2", "Running.Block.", "trial2", "TMA.Concentration")
+  Exp3Trials.comb <- merge(Exp3retestT1, Exp3retestT2, by.x = c("valve", "Subject", "valve2", "Running.Block.", "TMA.Concentration"), by.y = c("valve", "Subject", "valve2", "Running.Block.", "TMA.Concentration"))#merge the dataframes
+  testRetest.exp3 <- ddply(Exp3Trials.comb, .variables = c("Subject"), function(x) trial.cor = cor(x$trial1, x$trial2))
+  testRetest.exp3$trial.corr <- abs(testRetest.exp3$V1)#takes abs. value of correlation values
+  return(testRetest.exp3)
+}
+
+#Exp3retest.df <- subset(Exp3retest.df, select = c("Subject", "Trial", "IntensityRating.inv", "TMA.Concentration"))
+Exp3retestT1 <- subset(Exp3retest.df, Trial <=26)
+Exp3retestT2 <- subset(Exp3retest.df, Trial > 26)
+
+#run the test-retest function
+testRetest.exp3 <- correl.coeff(Exp3retestT1, Exp3retestT2)
+
+#put subjects into order
+testRetest.exp3$SubjectOrder <- factor(testRetest.exp3$Subject, levels = c(11, 50, 29, 33, 56, 49, 59, 58, 62, 54, 53))
+
+ggplot(testRetest.exp3, aes(x = SubjectOrder, y = trial.corr)) +
+  geom_point()  +
+  ylim(0,1)
+####################################################################################
+#for comparison with experiment 1 - rest of this code is in TMA Ratings_Exp1 vs Exp3.R
+testRetest.Exp3 <- testRetest.exp3
+testRetest.Exp3$Experiment <- 3
+####################################################################################
+
+#Split up the test-retest by 4 without the different valves
+
+#make a new function
+testRetest <- function(Trial1, Trial2){
+  Trial1 <- Trial1[,c(-3,-4)]
+  Trial2 <- Trial2[,c(-3,-4)]
+  names(Trial1) = c("valve", "Subject", "Running.Block.", "trial1", "TMA.Concentration")
+  names(Trial2) = c("valve", "Subject", "Running.Block.", "trial2", "TMA.Concentration")
+  Trial.combo <- merge(Trial1, Trial2)#merge the dataframes
+  testRetest.Exp3 <- ddply(Trial.combo, .variables = c("Subject"), function(x) trial.cor = cor(x$trial1, x$trial2))
+  testRetest.Exp3$V1 <- abs(testRetest.Exp3$V1)#takes abs. value of correlation values
+  return(testRetest.Exp3)
+}
+
+TrialSplit <- subset(Exp3retest.df, Trial <= 26)
+Trial1 <- subset(TrialSplit, valve2 == 23)
+Trial2 <- subset(TrialSplit, valve2 == 24)
+TrialSplit2 <- subset(Exp3retest.df, Trial >26)
+Trial3 <- subset(TrialSplit2, valve2 == 23)
+Trial4 <- subset(TrialSplit2, valve2 == 24)
+
+#make all the different combinations
+TR.12 <- testRetest(Trial1, Trial2)
+names(TR.12) <- c("Subject", "TR12")
+TR.13 <- testRetest(Trial1, Trial3)
+names(TR.13) <- c("Subject", "TR13")
+TR.14 <- testRetest(Trial1, Trial4)
+names(TR.14) <- c("Subject", "TR14")
+TR.23 <- testRetest(Trial2, Trial3)
+names(TR.23) <- c("Subject", "TR23")
+TR.24 <- testRetest(Trial2, Trial4)
+names(TR.24) <- c("Subject", "TR24")
+TR.34 <- testRetest(Trial3, Trial4)
+names(TR.34) <- c("Subject", "TR34")
+
+TR.allCombos <- merge(TR.12, TR.13)
+TR.allCombos <- merge(TR.allCombos, TR.14)
+TR.allCombos <- merge(TR.allCombos, TR.23)
+TR.allCombos <- merge(TR.allCombos, TR.24)
+TR.allCombos <- merge(TR.allCombos, TR.34)
+
+#melt the data
+TR.allCombos.melt <- melt(TR.allCombos, c("Subject"))
+#visualize
+ggplot(TR.allCombos.melt, aes(x = factor(Subject), y = value, color = variable)) +
+  geom_point(aes(size = 10)) +
+  ylim(0,1) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  ylab("Test-Retest Correlation") +
+  xlab("Subjects") +
+  geom_hline(yintercept = 0.4) +
+  ggtitle("Test-Retest Correlation for All Trial Combinations in Experiment 3")
+  
+```
+  
+The first graph shows the difference between the first set of trials and the second set (with the dataframe divided in 2). Each stimulus was presented 4 times total, but with one of two different DEP (antagonist solvent) jars. Therefore, graph 1 is with matched DEP jars. Graph 2 compares the different trials in order of presentation. DEP jars may be the same in 1 and 3 or 1 and 4, but it is not consistent between the people so we cannot draw any conclusions about whether there are differences between the two DEP jars.  
+  
+There seems to be a pretty large effect of time on the test-retest scores, even after the odors were refreshed, around subject 49, the scores did not improve as much. This could just be the participants who came in, or it could be that odors need to be made from scratch every time rather than refreshing from a stock solution (maybe there is something about TMA that breaks down over time). The first few participants seemed to be able to do the task fairly well.  
+  
+We are still interested in figuring out what is going on with TMA and how we can best get subjects to smell it. There is still something strange going on with our stimulus presentation here that needs to be worked out. 

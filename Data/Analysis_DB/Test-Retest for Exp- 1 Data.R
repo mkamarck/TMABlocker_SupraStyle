@@ -55,10 +55,10 @@ ggplot(data = subset(testTMA.trials), aes(x = Trial1, y = Trial2, color = Type))
   facet_wrap(~Subject)
 
 #Do the correlation
-testTMA.corr <- ddply(testTMA.trials, .variables = c("Subject", "Type"), function(x) trial.cor = cor(x$Trial1, x$Trial2))
+testTMA.corr <- ddply(testTMA.trials, .variables = c("Subject", "Type_new"), function(x) trial.cor = cor(x$Trial1, x$Trial2))
 testTMA.corr$trial.corr <- abs(testTMA.corr$V1)#takes abs. value of correlation values
 
-ggplot(testTMA.corr, aes(x = Type, y = trial.corr)) +
+ggplot(testTMA.corr, aes(x = Type_new, y = trial.corr)) +
   geom_point() +
   facet_wrap(~Subject)
 
@@ -74,7 +74,7 @@ testRetest.Exp1 <- subset(testTMA.corr, Type == "TMA")
 testRetest.Exp1$Experiment <- 1
 
 #one option for comparing TMA to Linalool in terms of consistency#### Paired t-test 
-png("figures/allSubjectsTMAlwrCorrLinalool.png",width = 200, height = 360,units = "px")
+#png("figures/allSubjectsTMAlwrCorrLinalool.png",width = 200, height = 360,units = "px")
 ggplot(subset(testTMA.corr, Type %in% c("TMA", "Linalool") & !Subject %in% c("14","16","18","36")), aes(x = Type, y = trial.corr, color = factor(Subject), group = Subject)) +
   geom_point() +
   geom_line()+
@@ -83,21 +83,30 @@ ggplot(subset(testTMA.corr, Type %in% c("TMA", "Linalool") & !Subject %in% c("14
   ylab("Intensity Rating Correlation Coefficient")+
   theme(legend.position = "none")
   #theme_bw() 
-dev.off()
+#dev.off()
+
+########################################################################################################################
+#unity line graph
+unityLine <- subset(testTMA.corr, Type %in% c("TMA", "Linalool") & !Subject %in% c("14","16","18","36"))
+unityLine.cast <- dcast(unityLine, Subject~Type, value.var = "trial.corr")
 
 #Another option for comparing TMA to Linalool in terms of consistency####  
-ggplot(subset(testTMA.corr, Type %in% c("TMA", "Linalool") & !Subject %in% c("14","16","18","36")), aes(x = Type, y = trial.corr, color = factor(Subject), group = Subject)) +
-  geom_point() +
+png("Analysis/Figures/Experiment1_TestRetest_TMAvLinalool.png", width = 1200, height = 960)
+ggplot(unityLine.cast, aes(x = Linalool, y = TMA, color = factor(Subject))) +
+  geom_point(aes(size = 6)) +
   geom_abline(a = 0, y = 1)+
-  xlim(0,1) +
-  ylim(0,1)+
-  ggtitle("Test-Retest Correlation") +
-  xlab("Linalool test-retest") + 
-  ylab(" TMA test-retest")+
-  theme(legend.position = "none")
+  xlim(0, 1) +
+  ylim(0, 1) +
+  ggtitle("Experiment 1: Test-Retest Correlation of Linalool versus TMA") +
+  xlab("Linalool Test-Retest Correlation Coefficient") + 
+  ylab("TMA Test-Retest Correlation Coefficient")+
+  theme_bw() +
+  theme(legend.position = "none", 
+        text = element_text(size = 30))
+dev.off()
 
 
-
+########################################################################################################################
 #Paired t-test#####
 statsCorrelation <- t.test(trial.corr~Type, data = subset(testTMA.corr, Type %in% c("TMA", "Linalool") & !Subject %in% c("14","16","18","36")), paired = TRUE)
 statsCorrelation
